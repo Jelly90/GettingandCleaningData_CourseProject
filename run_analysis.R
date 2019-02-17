@@ -21,18 +21,45 @@ download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUC
 unzip("ProjectData.zip",exdir="ProjectData")
 
 ################################################################################
-# You should create one R script called run_analysis.R that does the following.
+# libraries:
+library(plyr)
+library(dplyr)
+library(tidyr)
 
+################################################################################
+# You should create one R script called run_analysis.R that does the following.
+# Check
+
+################################################################################
 # Merges the training and the test sets to create one data set.
 
+# load all data necessary
+features <- read.table("ProjectData/UCI HAR Dataset/features.txt", 
+                       header = FALSE, stringsAsFactors = FALSE)[,2]
+activity_labels <- read.table("ProjectData/UCI HAR Dataset/activity_labels.txt", 
+                              header = FALSE, stringsAsFactors = FALSE)[,2]
 
+test <- read.table("ProjectData/UCI HAR Dataset/test/X_test.txt", 
+                   header = FALSE, stringsAsFactors = FALSE)
+sub.test <- read.table("ProjectData/UCI HAR Dataset/test/subject_test.txt", 
+                       header = FALSE, stringsAsFactors = FALSE)
+
+train <- read.table("ProjectData/UCI HAR Dataset/train/X_train.txt", 
+                   header = FALSE, stringsAsFactors = FALSE)
+sub.train <- read.table("ProjectData/UCI HAR Dataset/train/subject_train.txt", 
+                       header = FALSE, stringsAsFactors = FALSE)
+
+################################################################################
 # Extracts only the measurements on the mean and standard deviation for 
 # each measurement.
 
+################################################################################
 # Uses descriptive activity names to name the activities in the data set
 
+################################################################################
 # Appropriately labels the data set with descriptive variable names.
 
+################################################################################
 # From the data set in step 4, creates a second, independent tidy data set 
 # with the average of each variable for each activity and each subject.
 
