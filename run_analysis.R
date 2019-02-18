@@ -18,9 +18,8 @@ download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUC
               "ProjectData.zip")
 
 # unzip Folder
-if (!file.exists(zipFile)) {
 unzip("ProjectData.zip",exdir="ProjectData", mode = "wb")
-}
+
 ################################################################################
 # libraries:
 library(plyr)
@@ -35,21 +34,27 @@ library(tidyr)
 # Merges the training and the test sets to create one data set.
 
 # load all data necessary
+
+# variable names
 features <- read.table("ProjectData/UCI HAR Dataset/features.txt", 
                        header = FALSE, stringsAsFactors = FALSE)[,2]
+# activity names
 activity_labels <- read.table("ProjectData/UCI HAR Dataset/activity_labels.txt", 
                               header = FALSE, stringsAsFactors = FALSE)[,2]
 
+# data test/trainingset
 test <- read.table("ProjectData/UCI HAR Dataset/test/X_test.txt", 
                    header = FALSE, stringsAsFactors = FALSE)
+train <- read.table("ProjectData/UCI HAR Dataset/train/X_train.txt", 
+                    header = FALSE, stringsAsFactors = FALSE)
+
+# subjects
 sub.test <- read.table("ProjectData/UCI HAR Dataset/test/subject_test.txt", 
                        header = FALSE, stringsAsFactors = FALSE)
-
-train <- read.table("ProjectData/UCI HAR Dataset/train/X_train.txt", 
-                   header = FALSE, stringsAsFactors = FALSE)
 sub.train <- read.table("ProjectData/UCI HAR Dataset/train/subject_train.txt", 
                        header = FALSE, stringsAsFactors = FALSE)
 
+# activities
 activity.train <- read.table("ProjectData/UCI HAR Dataset/train/y_train.txt", 
                     header = FALSE, stringsAsFactors = FALSE)
 activity.test <- read.table("ProjectData/UCI HAR Dataset/test/y_test.txt", 
@@ -79,9 +84,10 @@ merged <- rbind(train,test)
 # Extracts only the measurements on the mean and standard deviation for 
 # each measurement.
 
+# create vector for extracting mean and standard deviation
 mean_std <- grep("mean\\(\\)|std", features)
 
-# add last two columns to selection vector (test_train, activity & subject)
+# add last three columns to selection vector (test_train, activity & subject)
 vec <- c(mean_std, 562:564)
 merged_mean_std <- merged[,vec]
 
@@ -102,7 +108,8 @@ names(merged_mean_std) <-
   gsub("Mag", "magnitude_", .)  %>%
   gsub("\\-mean\\(\\)", "mean", .) %>%
   gsub("\\-std\\(\\)", "standardDeviation", .) %>%
-  gsub("Jerk", "Jerk_", .) 
+  gsub("Jerk", "Jerk_", .) %>%
+  gsub("timeDomain_est_train", "test_train", .)  
 
 
 ################################################################################

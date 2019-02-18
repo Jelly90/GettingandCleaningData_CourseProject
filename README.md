@@ -1,7 +1,7 @@
 # GettingandCleaningData_CourseProject
 ### This Repository contains my result of the Course Project for the Getting and Cleaning Data Course on Coursera
 
-## Content:
+### Content:
 - README, this file, containing useful information on this repository.
 - CodeBook.md, describes analysis and variables.
 - run_analysis.R, the R-Script for creating the dataset as was ask for in this Project.
