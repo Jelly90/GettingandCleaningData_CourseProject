@@ -18,6 +18,8 @@ contains:
   +  X_train.txt, all measurements for the trainset (7352 observations x 561 variables)
   +  y_train.txt, all activity assignments for the trainset
 
+## Steps of the Analysis
+
 all of the data mentioned was merged into on dataframe names **merged** containing:
 1. 10299 observations (test and trainingset merged together by rbind())
 2. 564 variables, 561 features + activity assignments + test_train assignment + subject assignment
